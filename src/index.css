@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.fontFamily {
+    font-family: Avenir, Montserrat, Corbel, source-sans-pro, sans-serif;
+  }
+  
