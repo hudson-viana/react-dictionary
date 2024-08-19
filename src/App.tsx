@@ -42,6 +42,13 @@ function App() {
       const response = await fetch(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
       );
+
+      if (response.status === 404) {
+        setHasError(true);
+        console.error("The error is: 404 Not Found");
+        return;
+      }
+
       const jsonData = (await response.json()) as Result[];
       setData(jsonData);
     } catch (error) {
@@ -61,6 +68,10 @@ function App() {
   if (isLoading) {
     return (
       <>
+        <h1 className="text-3xl font-black text-gray-300 mb-8 ">
+          English Dictionary
+        </h1>
+
         <InputSearch
           setSearchParams={setSearchParams}
           word={word}
@@ -68,7 +79,6 @@ function App() {
           fetchWord={fetchWord}
           isLoading={isLoading}
         />
-        <span className="mt-10">Loading...</span>
       </>
     );
   }
@@ -76,28 +86,39 @@ function App() {
   if (hasError) {
     return (
       <>
+        <h1 className="text-3xl font-black text-gray-300 mb-8">
+          English Dictionary
+        </h1>
+
         <InputSearch
           setSearchParams={setSearchParams}
           word={word}
           handleKeyDown={handleKeyDown}
           fetchWord={fetchWord}
+          isLoading={isLoading}
         />
-        <h1 className="text-3xl mt-10">A error happened, try again.</h1>
+        <h2 className="text-xl mt-10 text-center max-w-[50%]">
+          A error happened or the API used do not have a definition for this
+          word. Try another word.
+        </h2>
       </>
     );
   }
 
   return (
     <>
+      <h1 className="text-3xl font-black text-gray-300 mb-8">
+        English Dictionary
+      </h1>
+
       <InputSearch
         setSearchParams={setSearchParams}
         word={word}
         handleKeyDown={handleKeyDown}
         fetchWord={fetchWord}
+        isLoading={isLoading}
       />
-      <WordResult 
-      data={data}
-      />
+      <WordResult data={data} />
     </>
   );
 }
