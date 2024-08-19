@@ -87,7 +87,7 @@ function App() {
   }
 
   return (
-    <div>
+    <>
       <InputSearch
         setSearchParams={setSearchParams}
         word={word}
@@ -97,7 +97,7 @@ function App() {
       <WordResult 
       data={data}
       />
-    </div>
+    </>
   );
 }
 
