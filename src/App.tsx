@@ -66,6 +66,7 @@ function App() {
           word={word}
           handleKeyDown={handleKeyDown}
           fetchWord={fetchWord}
+          isLoading={isLoading}
         />
         <span className="mt-10">Loading...</span>
       </>
